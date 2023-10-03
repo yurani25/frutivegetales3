@@ -40,6 +40,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/organicosLayout"
             android:layout_width="match_parent"
             android:layout_height="63dp"
             android:gravity="center_vertical"
@@ -68,10 +69,11 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#D1D1D1"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="8dp"
+            android:background="#D1D1D1" />
 
         <LinearLayout
+            android:id="@+id/inorganicosLayout"
             android:layout_width="match_parent"
             android:layout_height="54dp"
             android:gravity="center_vertical"
@@ -101,8 +103,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#D1D1D1"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="8dp"
+            android:background="#D1D1D1" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -134,8 +136,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#D1D1D1"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="8dp"
+            android:background="#D1D1D1" />
 
         <LinearLayout
             android:layout_width="match_parent"
