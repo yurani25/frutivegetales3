@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import java.util.ArrayList
-import java.util.List
 
 class homeFragment : Fragment() {
 
@@ -25,9 +23,9 @@ class homeFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(activity)
 
         val productList = ArrayList<Product>()
-        productList.add(Product("mora", 5.000, "moras frescas", R.drawable.imagen1))
-        productList.add(Product("tomates", 4.000, "tomate fresco", R.drawable.imagen2))
-        productList.add(Product("maracuya", 8.000, "maracuya", R.drawable.imagen3))
+        productList.add(Product("Mora", 5000.0, "Moras frescas", R.drawable.imagen1))
+        productList.add(Product("Tomates", 4000.0, "Tomates frescos", R.drawable.imagen2))
+        productList.add(Product("Maracuyá", 8000.0, "Maracuyá fresco", R.drawable.imagen3))
 
         adapter = ProductAdapter(requireContext(), productList)
         recyclerView.adapter = adapter

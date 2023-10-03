@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="centerInside"
-            android:src="@drawable/imagen2" />
+            android:src="@drawable/imagen2"/>
 
 
         <!-- Nombre del producto -->

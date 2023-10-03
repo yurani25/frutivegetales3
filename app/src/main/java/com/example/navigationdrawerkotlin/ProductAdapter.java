@@ -1,4 +1,5 @@
-package com.example.navigationdrawerkotlin;// ProductAdapter.java
+package com.example.navigationdrawerkotlin;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,10 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.navigationdrawerkotlin.Product;
-import com.example.navigationdrawerkotlin.R;
-
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
@@ -37,7 +34,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.productNameTextView.setText(product.getName());
         holder.productPriceTextView.setText("Precio: $" + product.getPrice());
         holder.productDescriptionTextView.setText(product.getDescription());
-
+        holder.productImageView.setImageResource(product.getImageResource());
 
         holder.addToCartImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,4 +67,3 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         }
     }
 }
-
