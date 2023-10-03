@@ -17,12 +17,10 @@ class CategoriasFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_categorias, container, false)
 
-        // Encuentra el LinearLayout de "Orgánicos" por su ID
+
         val organicosLayout = view.findViewById<LinearLayout>(R.id.organicosLayout)
 
-        // Agrega un OnClickListener al LinearLayout de "Orgánicos"
         organicosLayout.setOnClickListener {
-            // Abre la nueva vista (DetalleOrganicosFragment) cuando se hace clic en "Orgánicos"
             val organicosFragment = OrganicosFragment()
             val fragmentManager: FragmentManager? = fragmentManager
             fragmentManager?.beginTransaction()
@@ -33,10 +31,10 @@ class CategoriasFragment : Fragment() {
 
 
 
-// Encuentra el LinearLayout de "Orgánicos" por su ID
+
         val inorganicosLayout = view.findViewById<LinearLayout>(R.id.inorganicosLayout)
 
-        // Agrega un OnClickListener al LinearLayout de "Orgánicos"
+
         inorganicosLayout.setOnClickListener {
 
             val inorganicosFragment = inorganicosFragment()
