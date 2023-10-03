@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+     <!-- Barra de búsqueda -->
+     <EditText
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:hint="Buscar"
+         android:inputType="text" />
+
+     <!-- Opciones de configuración -->
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="vertical"
+         android:layout_marginTop="16dp">
+
+          <!-- Tu cuenta -->
+          <LinearLayout
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:layout_marginBottom="8dp">
+
+               <ImageView
+                   android:layout_width="24dp"
+                   android:layout_height="46dp"
+                   android:src="@drawable/perfil" /> <!-- Icono para Tu cuenta -->
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="match_parent"
+                   android:layout_marginStart="8dp"
+                   android:text="Tu cuenta"
+                   android:textColor="#000000"
+                   android:textSize="18sp" />
+          </LinearLayout>
+
+          <!-- Notificaciones -->
+          <LinearLayout
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:layout_marginBottom="8dp">
+
+               <ImageView
+                   android:layout_width="24dp"
+                   android:layout_height="42dp"
+                   android:src="@drawable/notificacion" /> <!-- Icono para Notificaciones -->
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Notificaciones"
+                   android:textSize="18sp"
+                   android:textColor="#000000"
+                   android:layout_marginStart="8dp" />
+          </LinearLayout>
+
+          <!-- Seguridad -->
+          <LinearLayout
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:layout_marginBottom="8dp">
+
+               <!-- Icono para Seguridad -->
+
+               <ImageView
+                   android:layout_width="24dp"
+                   android:layout_height="34dp"
+                   android:src="@drawable/candado" />
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Seguridad/acceso a tu cuenta"
+                   android:textSize="18sp"
+                   android:textColor="#000000"
+                   android:layout_marginStart="8dp" />
+          </LinearLayout>
+     </LinearLayout>
+</LinearLayout>
