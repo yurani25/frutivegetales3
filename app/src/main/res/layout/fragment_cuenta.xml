@@ -76,6 +76,7 @@
 
             <!-- editar perfil -->
             <Button
+                android:id="@+id/editProfileButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Editar Perfil"
