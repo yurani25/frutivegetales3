@@ -3,23 +3,23 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="250dp"
-    android:background="@color/amarillo"
+    android:background="@color/verde"
     android:padding="30dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
 
      <ImageView
          android:id="@+id/frutilogo"
-         android:layout_width="126dp"
+         android:layout_width="180dp"
          android:layout_height="108dp"
-         android:src="@drawable/frutilogo" />
+         android:src="@drawable/logo" />
 
      <TextView
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
+         android:layout_below="@id/frutilogo"
+         android:layout_marginTop="7dp"
          android:text="frutivegetales"
          android:textColor="@color/black"
-         android:textStyle="bold"
-         android:layout_below="@id/frutilogo"
-         android:layout_centerHorizontal="true" />
+         android:textStyle="bold" />
 </RelativeLayout>

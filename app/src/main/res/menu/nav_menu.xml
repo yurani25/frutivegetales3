@@ -1,54 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-     tools:showIn = "navigation_view">
+    tools:showIn="navigation_view">
 
-     <group
-    android:checkableBehavior="single">
+    <group android:checkableBehavior="single">
 
-     <item
-     android:id="@+id/nav_home"
-     android:icon="@drawable/baseline_home_24"
-     android:title="inicio"/>
-
-     <item
-     android:id="@+id/nav_settings"
-     android:icon="@drawable/baseline_settings_24"
-     android:title="configuraciones"/>
-
-     <item
-     android:id="@+id/nav_categorias"
-     android:icon="@drawable/categorias"
-     android:title="categorias"/>
-     <item
-     android:id="@+id/nav_busqueda"
-     android:icon="@drawable/busqueda"
-     android:title="buscar"/>
-         <item
-             android:id="@+id/nav_quejas"
-             android:icon="@drawable/quejas"
-             android:title="ayuda/pqrs"/>
-
-         <item
-             android:id="@+id/nav_productos"
-             android:icon="@drawable/misproductos"
-             android:title="mis productos"/>
-         <item
-             android:id="@+id/nav_cuenta"
-             android:icon="@drawable/perfil"
-             android:title="mi cuenta"/>
-
-     </group>
-
-     <item
-     android:title="">
-    <menu>
         <item
-            android:id="@+id/nav_logout"
-            android:icon="@drawable/baseline_logout_24"
-            android:title="salir"/>
-     </menu>
+            android:id="@+id/nav_home"
+            android:icon="@drawable/baseline_home_24"
+            android:title="Inicio" />
 
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/baseline_settings_24"
+            android:title="Configuraciones" />
+
+        <item
+            android:id="@+id/nav_categorias"
+            android:icon="@drawable/categorias"
+            android:title="Categorías" />
+
+        <item
+            android:id="@+id/nav_busqueda"
+            android:icon="@drawable/busqueda"
+            android:title="Buscar" />
+
+        <item
+            android:id="@+id/nav_quejas"
+            android:icon="@drawable/quejas"
+            android:title="Ayuda/PQRS" />
+
+        <item
+            android:id="@+id/nav_cart"
+            android:icon="@drawable/shopping_cart"
+            android:title="Carrito" />
+
+        <item
+            android:id="@+id/nav_misproductos"
+            android:icon="@drawable/misproductos"
+            android:title="Mis productos" />
+
+        <item
+            android:id="@+id/nav_cuenta"
+            android:icon="@drawable/perfil"
+            android:title="Mi cuenta" />
+
+    </group>
+
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/baseline_logout_24"
+                android:title="Salir" />
+        </menu>
     </item>
 </menu>

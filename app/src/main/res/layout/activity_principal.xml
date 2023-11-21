@@ -13,14 +13,14 @@
         android:layout_height="300dp"
         android:layout_gravity="center"
         android:layout_marginBottom="80dp"
-        android:src="@drawable/frutitrasn" />
+        android:src="@drawable/logo"/>
 
     <Button
 
         android:id="@+id/registerMainButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#FFEB3B"
+        android:backgroundTint="#05FB0F"
         android:text="Registrarse"
         android:textColor="@color/black" />
 
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
-        android:backgroundTint="#FFEB3B"
+        android:backgroundTint="#07FB11"
         android:textColor="@color/black"
         android:text="Iniciar sesión" />
 
