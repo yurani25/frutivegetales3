@@ -1,66 +1,147 @@
-<androidx.cardview.widget.CardView
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardElevation="4dp"
-    app:cardCornerRadius="8dp"
-    tools:context=".inorganicosFragment">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_margin="8dp">
 
-        <!-- Imagen del producto -->
-        <ImageView
-            android:id="@+id/productImage"
+        <!-- Título "Inorgánicos" -->
+        <TextView
+            android:id="@+id/inorganicosTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:text="Inorgánicos"
+            android:padding="8dp"
+            android:textStyle="bold"/>
+
+        <!-- Primer producto inorgánico -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/imagen1" />
-
-
-        <!-- Nombre del producto -->
-        <TextView
-            android:id="@+id/productNameTextView"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:padding="8dp"
-            android:text="moras" />
+            app:cardElevation="4dp"
+            app:cardCornerRadius="8dp">
 
-        <!-- Precio del producto -->
-        <TextView
-            android:id="@+id/productPriceTextView"
-            android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!-- Imagen del primer producto inorgánico -->
+                <ImageView
+                    android:id="@+id/inorganicoProductImage1"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/imagen1" />
+
+                <!-- Nombre del primer producto inorgánico -->
+                <TextView
+                    android:id="@+id/inorganicoProductNameTextView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:padding="8dp"
+                    android:text="Moras Inorgánicas" />
+
+                <!-- Precio del primer producto inorgánico -->
+                <TextView
+                    android:id="@+id/inorganicoProductPriceTextView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:padding="8dp"
+                    android:text="Precio: 5.000" />
+
+                <!-- Descripción del primer producto inorgánico -->
+                <TextView
+                    android:id="@+id/inorganicoProductDescriptionTextView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:padding="8dp"
+                    android:text="Moras frescas pero no orgánicas" />
+
+                <!-- Icono para agregar al carrito del primer producto inorgánico -->
+                <ImageView
+                    android:id="@+id/inorganicoAddToCartImageView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:contentDescription="Agregar al carrito"
+                    android:padding="8dp"
+                    android:src="@drawable/shopping_cart" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Segundo producto inorgánico -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:padding="8dp"
-            android:text="Precio: 5.000" />
+            app:cardElevation="4dp"
+            app:cardCornerRadius="8dp"
+            android:layout_marginTop="16dp">
 
-        <!-- Descripción del producto -->
-        <TextView
-            android:id="@+id/productDescriptionTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:padding="8dp"
-            android:text="moras frecos" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/addToCartImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:src="@drawable/shopping_cart"
-            android:padding="8dp"
-            android:contentDescription="Agregar al carrito" />
+                <!-- Imagen del segundo producto inorgánico -->
+                <ImageView
+                    android:id="@+id/inorganicoProductImage2"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/manzanas2"/>
 
+                <!-- Nombre del segundo producto inorgánico -->
+                <TextView
+                    android:id="@+id/inorganicoProductNameTextView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:padding="8dp"
+                    android:text="Manzanas Inorgánicas" />
+
+                <!-- Precio del segundo producto inorgánico -->
+                <TextView
+                    android:id="@+id/inorganicoProductPriceTextView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:padding="8dp"
+                    android:text="Precio: 6.000" />
+
+                <!-- Descripción del segundo producto inorgánico -->
+                <TextView
+                    android:id="@+id/inorganicoProductDescriptionTextView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:padding="8dp"
+                    android:text="Manzanas frescas pero no orgánicas" />
+
+                <!-- Icono para agregar al carrito del segundo producto inorgánico -->
+                <ImageView
+                    android:id="@+id/inorganicoAddToCartImageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:src="@drawable/shopping_cart"
+                    android:padding="8dp"
+                    android:contentDescription="Agregar al carrito" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
-
-
-</androidx.cardview.widget.CardView>
+</ScrollView>

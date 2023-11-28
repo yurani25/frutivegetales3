@@ -32,50 +32,67 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+
             <!-- Imagen de perfil -->
             <ImageView
+                android:id="@+id/profileImageView"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/usuarioperfil"
                 android:layout_gravity="center"
                 android:layout_marginBottom="16dp" />
 
             <!-- Nombre de usuario -->
             <TextView
+                android:id="@+id/nameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nombre de Usuario: yurani"
+                android:text="Nombre de Usuario: "
                 android:textSize="18sp"
                 android:textColor="#000000" />
 
+
+            <!-- apellidos del usuario -->
+            <TextView
+                android:id="@+id/apellidoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="apellidos de Usuario: "
+                android:textSize="18sp"
+                android:textColor="#000000" />
+
+            <!-- Edad -->
+            <TextView
+                android:id="@+id/edadTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edad: "
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:layout_marginTop="8dp" />
+
+
             <!-- Correo electrónico -->
             <TextView
+                android:id="@+id/emailTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Correo Electrónico: yurani@gmail.com"
+                android:text="Correo Electrónico: "
                 android:textSize="18sp"
                 android:textColor="#000000"
                 android:layout_marginTop="8dp" />
 
-            <!-- direcion -->
+            <!-- telefono del usuario -->
             <TextView
+                android:id="@+id/telefonoTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="direccion: los cerrillos"
+                android:text="telefono: "
                 android:textSize="18sp"
                 android:textColor="#000000"
                 android:layout_marginTop="8dp" />
 
-            <!-- edad -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="edad: 22 años"
-                android:textSize="18sp"
-                android:textColor="#000000"
-                android:layout_marginTop="8dp" />
 
-            <!-- editar perfil -->
+            <!-- Editar perfil -->
             <Button
                 android:id="@+id/editProfileButton"
                 android:layout_width="match_parent"

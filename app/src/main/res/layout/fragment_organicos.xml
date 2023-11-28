@@ -1,66 +1,149 @@
-<androidx.cardview.widget.CardView
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardElevation="4dp"
-    app:cardCornerRadius="8dp"
-    tools:context=".OrganicosFragment">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="8dp">
 
-        <!-- Imagen del producto -->
-        <ImageView
-            android:id="@+id/productImage"
+        <!-- Título "Orgánicos" -->
+        <TextView
+            android:id="@+id/organicosTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:text="Orgánicos"
+            android:padding="8dp"
+            android:textStyle="bold"/>
+
+        <!-- Primer producto -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/imagen2"/>
-
-
-        <!-- Nombre del producto -->
-        <TextView
-            android:id="@+id/productNameTextView"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:padding="8dp"
-            android:text="tomates" />
+            app:cardElevation="4dp"
+            app:cardCornerRadius="8dp">
 
-        <!-- Precio del producto -->
-        <TextView
-            android:id="@+id/productPriceTextView"
-            android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!-- Imagen del primer producto -->
+                <ImageView
+                    android:id="@+id/productImage1"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/imagen2" />
+
+                <!-- Nombre del primer producto -->
+                <TextView
+                    android:id="@+id/productNameTextView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="Tomates Orgánicos"
+                    android:textSize="18sp" />
+
+                <!-- Precio del primer producto -->
+                <TextView
+                    android:id="@+id/productPriceTextView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="Precio: 7.000"
+                    android:textSize="16sp" />
+
+                <!-- Descripción del primer producto -->
+                <TextView
+                    android:id="@+id/productDescriptionTextView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="tomates cosechados desde la fica las etrellas
+                    100% natural , espermos este producto sea de  tu agrado "
+                    android:textSize="14sp" />
+
+                <!-- Icono para agregar al carrito del primer producto -->
+                <ImageView
+                    android:id="@+id/addToCartImageView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:contentDescription="Agregar al carrito"
+                    android:padding="8dp"
+                    android:src="@drawable/shopping_cart" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Segundo producto -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:padding="8dp"
-            android:text="Precio: 5.000" />
+            app:cardElevation="4dp"
+            app:cardCornerRadius="8dp"
+            android:layout_marginTop="16dp">
 
-        <!-- Descripción del producto -->
-        <TextView
-            android:id="@+id/productDescriptionTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:padding="8dp"
-            android:text="tomates frecos" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/addToCartImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:src="@drawable/shopping_cart"
-            android:padding="8dp"
-            android:contentDescription="Agregar al carrito" />
+                <!-- Imagen del segundo producto -->
+                <ImageView
+                    android:id="@+id/productImage2"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/lechuga2"/>
 
+                <!-- Nombre del segundo producto -->
+                <TextView
+                    android:id="@+id/productNameTextView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:padding="8dp"
+                    android:text="Lechugas Orgánicas" />
+
+                <!-- Precio del segundo producto -->
+                <TextView
+                    android:id="@+id/productPriceTextView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:padding="8dp"
+                    android:text="Precio: 8.000" />
+
+                <!-- Descripción del segundo producto -->
+                <TextView
+                    android:id="@+id/productDescriptionTextView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:padding="8dp"
+                    android:text="La lechuga es un alimento que aporta muy pocas calorías por su alto contenido en agua
+ y su escasa cantidad de hidratos de carbono, proteínas y grasas" />
+
+                <!-- Icono para agregar al carrito del segundo producto -->
+                <ImageView
+                    android:id="@+id/addToCartImageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:src="@drawable/shopping_cart"
+                    android:padding="8dp"
+                    android:contentDescription="Agregar al carrito" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
-
-
-</androidx.cardview.widget.CardView>
+</ScrollView>
