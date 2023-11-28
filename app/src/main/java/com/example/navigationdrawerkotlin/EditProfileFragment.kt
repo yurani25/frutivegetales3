@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.navigationdrawerkotlin.R
@@ -15,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.squareup.picasso.Picasso
 
 class EditProfileFragment : Fragment() {
 
@@ -58,7 +60,11 @@ class EditProfileFragment : Fragment() {
             if (name.isNotEmpty() && apellido.isNotEmpty() && edad.isNotEmpty()) {
                 editUserProfile(name, apellido, edad, telefono)
             } else {
-                Toast.makeText(requireContext(), "Ingrese todos los campos obligatorios", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Ingrese todos los campos obligatorios",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 
@@ -78,6 +84,7 @@ class EditProfileFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1 && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
             selectedImageUri = data.data
+            Log.d("ImageUri", "Selected Image Uri: $selectedImageUri")
         }
     }
 
@@ -89,16 +96,23 @@ class EditProfileFragment : Fragment() {
                     val apellidoEditText = view.findViewById<TextInputEditText>(R.id.apellido)
                     val edadEditText = view.findViewById<TextInputEditText>(R.id.edad)
                     val telefonoText = view.findViewById<TextInputEditText>(R.id.etPhone)
+                    val profileImageView = view.findViewById<ImageView>(R.id.profileImageView) // Agrega el ImageView correspondiente
 
                     val name = snapshot.child("name").getValue(String::class.java)
                     val apellido = snapshot.child("apellido").getValue(String::class.java)
                     val edad = snapshot.child("edad").getValue(String::class.java)
                     val telefono = snapshot.child("telefono").getValue(String::class.java)
+                    val imageUrl = snapshot.child("imageUrl").getValue(String::class.java)
 
                     nameEditText.setText(name)
                     apellidoEditText.setText(apellido)
                     edadEditText.setText(edad)
                     telefonoText.setText(telefono)
+
+                    // Cargar y mostrar la imagen usando Picasso
+                    if (!imageUrl.isNullOrEmpty()) {
+                        Picasso.get().load(imageUrl).into(profileImageView)
+                    }
                 }
             }
 
@@ -130,7 +144,11 @@ class EditProfileFragment : Fragment() {
                         }
                     }
                     .addOnFailureListener { exception ->
-                        Toast.makeText(requireContext(), "Error al cargar la imagen: ${exception.message}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Error al cargar la imagen: ${exception.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
             } else {
                 // Si no se selecciona una nueva imagen, solo actualizar los datos existentes
@@ -139,11 +157,14 @@ class EditProfileFragment : Fragment() {
         }
     }
 
-
     private fun updateUserData(userRef: DatabaseReference, userData: HashMap<String, Any>) {
         userRef.updateChildren(userData).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                Toast.makeText(requireContext(), "Perfil actualizado exitosamente", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Perfil actualizado exitosamente",
+                    Toast.LENGTH_SHORT
+                ).show()
 
                 // Enviar un resultado de vuelta a CuentaFragment
                 val resultIntent = Intent()
@@ -151,7 +172,11 @@ class EditProfileFragment : Fragment() {
                 requireActivity().setResult(Activity.RESULT_OK, resultIntent)
                 requireActivity().supportFragmentManager.popBackStack() // Regresar al fragmento anterior
             } else {
-                Toast.makeText(requireContext(), "Error al actualizar perfil: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Error al actualizar perfil: ${task.exception?.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
