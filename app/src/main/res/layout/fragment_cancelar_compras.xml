@@ -1,0 +1,153 @@
+<!-- fragment_cancelar_compras.xml -->
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Título -->
+        <TextView
+            android:id="@+id/cancelarComprasTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:text="Cancelar Compra"
+            android:textStyle="bold"
+            android:paddingBottom="16dp"/>
+
+        <!-- Primer Producto -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="389dp"
+            android:orientation="vertical">
+
+            <!-- Imagen del primer producto -->
+            <ImageView
+                android:id="@+id/productImage1"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/imagen3" />
+
+            <!-- Nombre del primer producto -->
+            <TextView
+                android:id="@+id/productNameTextView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Maracuyá"
+                android:textSize="18sp" />
+
+            <!-- Precio del primer producto -->
+            <TextView
+                android:id="@+id/productPriceTextView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Precio: 5.000"
+                android:textSize="16sp" />
+
+            <!-- Descripción del primer producto -->
+            <TextView
+                android:id="@+id/productDescriptionTextView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Maracuyá fresca"
+                android:textSize="14sp" />
+
+            <!-- Botones para confirmar o cancelar la acción -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnConfirmarCancelar1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Confirmar" />
+
+                <Button
+                    android:id="@+id/btnCancelar1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Cancelar" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Segundo Producto -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Imagen del segundo producto -->
+
+            <!-- Nombre del segundo producto -->
+            <ImageView
+                android:id="@+id/productImage2"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/imagen2" />
+
+            <TextView
+                android:id="@+id/productNameTextView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:padding="8dp"
+                android:text="Tomates" />
+
+            <!-- Precio del segundo producto -->
+            <TextView
+                android:id="@+id/productPriceTextView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:padding="8dp"
+                android:text="Precio: 8.000" />
+
+            <!-- Descripción del segundo producto -->
+            <TextView
+                android:id="@+id/productDescriptionTextView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:padding="8dp"
+                android:text="tomates frescos" />
+
+            <!-- Botones para confirmar o cancelar la acción -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnConfirmarCancelar2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Confirmar"/>
+
+                <Button
+                    android:id="@+id/btnCancelar2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Cancelar"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

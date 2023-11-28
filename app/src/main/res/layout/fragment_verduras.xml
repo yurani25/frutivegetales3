@@ -1,0 +1,215 @@
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_margin="8dp">
+
+        <!-- Título "Verduras" -->
+        <TextView
+            android:id="@+id/verdurasTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:text="Verduras"
+            android:padding="8dp"
+            android:textStyle="bold"/>
+
+        <!-- Primer producto de verduras -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="4dp"
+            app:cardCornerRadius="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!-- Imagen del primer producto de verduras -->
+                <ImageView
+                    android:id="@+id/verduraProductImage1"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/zanaorias" />
+
+                <!-- Nombre del primer producto de verduras -->
+                <TextView
+                    android:id="@+id/verduraProductNameTextView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:padding="8dp"
+                    android:text="Zanahorias" />
+
+                <!-- Precio del primer producto de verduras -->
+                <TextView
+                    android:id="@+id/verduraProductPriceTextView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:padding="8dp"
+                    android:text="Precio: 3.000" />
+
+                <!-- Descripción del primer producto de verduras -->
+                <TextView
+                    android:id="@+id/verduraProductDescriptionTextView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:padding="8dp"
+                    android:text="Es un vegetal diurético que evita la retención de líquidos. No puede faltar en verano, ya que facilita
+el bronceado de manera saludable y totalmente natural" />
+
+                <!-- Icono para agregar al carrito del primer producto de verduras -->
+                <ImageView
+                    android:id="@+id/verduraAddToCartImageView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:contentDescription="Agregar al carrito"
+                    android:padding="8dp"
+                    android:src="@drawable/shopping_cart" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Segundo producto de verduras -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="4dp"
+            app:cardCornerRadius="8dp"
+            android:layout_marginTop="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!-- Imagen del segundo producto de verduras -->
+                <ImageView
+                    android:id="@+id/verduraProductImage2"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/brocoli"/>
+
+                <!-- Nombre del segundo producto de verduras -->
+                <TextView
+                    android:id="@+id/verduraProductNameTextView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:padding="8dp"
+                    android:text="Broccoli" />
+
+                <!-- Precio del segundo producto de verduras -->
+                <TextView
+                    android:id="@+id/verduraProductPriceTextView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:padding="8dp"
+                    android:text="Precio: 4.000" />
+
+                <!-- Descripción del segundo producto de verduras -->
+                <TextView
+                    android:id="@+id/verduraProductDescriptionTextView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:padding="8dp"
+                    android:text="El brócoli, también conocido como brécol en otros países de habla hispana, es una verdura perteneciente a la familia de las crucíferas
+ al igual que el repollo, el coliflor y el nabo."
+                    tools:ignore="InvalidId" />
+
+                <!-- Icono para agregar al carrito del segundo producto de verduras -->
+                <ImageView
+                    android:id="@+id/verduraAddToCartImageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:src="@drawable/shopping_cart"
+                    android:padding="8dp"
+                    android:contentDescription="Agregar al carrito"
+                    tools:ignore="InvalidId" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Tercer producto de verduras -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="4dp"
+            app:cardCornerRadius="8dp"
+            android:layout_marginTop="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!-- Imagen del tercer producto de verduras -->
+                <ImageView
+                    android:id="@+id/verduraProductImage3"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/tomates1" />
+
+                <!-- Nombre del tercer producto de verduras -->
+                <TextView
+                    android:id="@+id/verduraProductNameTextView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:padding="8dp"
+                    android:text="tomates" />
+
+                <!-- Precio del tercer producto de verduras -->
+                <TextView
+                    android:id="@+id/verduraProductPriceTextView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:padding="8dp"
+                    android:text="Precio: 5.000" />
+
+                <!-- Descripción del tercer producto de verduras -->
+                <TextView
+                    android:id="@+id/verduraProductDescriptionTextView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:padding="8dp"
+                    android:text="El tomate es una planta de la familia de las Solanáceas, originaria de América del Sur." />
+
+                <!-- Icono para agregar al carrito del tercer producto de verduras -->
+                <ImageView
+                    android:id="@+id/verduraAddToCartImageView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:src="@drawable/shopping_cart"
+                    android:padding="8dp"
+                    android:contentDescription="Agregar al carrito" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</ScrollView>

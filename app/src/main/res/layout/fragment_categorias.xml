@@ -107,6 +107,7 @@
             android:background="#D1D1D1" />
 
         <LinearLayout
+            android:id="@+id/frutasLayout"
             android:layout_width="match_parent"
             android:layout_height="78dp"
             android:gravity="center_vertical"
@@ -140,6 +141,7 @@
             android:background="#D1D1D1" />
 
         <LinearLayout
+            android:id="@+id/verdurasLayout"
             android:layout_width="match_parent"
             android:layout_height="88dp"
             android:gravity="center_vertical"

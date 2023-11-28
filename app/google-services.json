@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "934318225479",
+    "project_id": "navigation-drawer-kotlin",
+    "storage_bucket": "navigation-drawer-kotlin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:934318225479:android:a2854fe62d219d56ed1962",
+        "android_client_info": {
+          "package_name": "com.example.navigationdrawerkotlin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7rW--TWdo4MzBBoKCnzV3n5wscx6iaYk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
