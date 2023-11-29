@@ -78,13 +78,20 @@ class EditProfileFragment : Fragment() {
 
         return view
     }
-
     // Método para manejar el resultado de seleccionar una imagen
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1 && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
             selectedImageUri = data.data
             Log.d("ImageUri", "Selected Image Uri: $selectedImageUri")
+
+            // Mostrar la imagen seleccionada en el ImageView
+            val selectedImageView = view?.findViewById<ImageView>(R.id.selectedImageView)
+            selectedImageView?.visibility = View.VISIBLE
+            Picasso.get().load(selectedImageUri).into(selectedImageView)
+
+            // También puedes ocultar el ImageView principal
+            view?.findViewById<ImageView>(R.id.profileImageView)?.visibility = View.GONE
         }
     }
 

@@ -22,29 +22,10 @@
          android:orientation="vertical"
          android:layout_marginTop="16dp">
 
-          <!-- Tu cuenta -->
-          <LinearLayout
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:orientation="horizontal"
-              android:layout_marginBottom="8dp">
-
-               <ImageView
-                   android:layout_width="24dp"
-                   android:layout_height="46dp"
-                   android:src="@drawable/perfil" /> <!-- Icono para Tu cuenta -->
-
-               <TextView
-                   android:layout_width="wrap_content"
-                   android:layout_height="match_parent"
-                   android:layout_marginStart="8dp"
-                   android:text="Tu cuenta"
-                   android:textColor="#000000"
-                   android:textSize="18sp" />
-          </LinearLayout>
-
           <!-- Notificaciones -->
           <LinearLayout
+
+              android:id="@+id/notificacionesLayout"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:orientation="horizontal"

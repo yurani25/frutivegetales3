@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_quejas -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, PqrsFragment())
                 .commit()
-            R.id.nav_productos -> supportFragmentManager.beginTransaction()
+            R.id.nav_misproductos -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, MisproductosFragment())
                 .commit()
             R.id.nav_cuenta -> supportFragmentManager.beginTransaction()

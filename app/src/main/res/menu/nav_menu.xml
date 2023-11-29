@@ -51,8 +51,6 @@
             android:title="Mostrar Mapa"
             android:icon="@drawable/baseline_map_24"
             app:showAsAction="ifRoom" />
-
-
     </group>
 
     <item android:title="">
@@ -63,4 +61,5 @@
                 android:title="Salir" />
         </menu>
     </item>
+
 </menu>
