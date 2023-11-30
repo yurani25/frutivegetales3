@@ -28,6 +28,10 @@ class PqrsFragment : Fragment() {
         // Obtén la referencia al LinearLayout de cancelar compras
         val cancelarComprasLayout = view.findViewById<LinearLayout>(R.id.cancelarComprasLayout)
         val preguntasComprasLayout = view.findViewById<LinearLayout>(R.id.preguntasComprasLayout)
+        val devolucionesLayout = view.findViewById<LinearLayout>(R.id.devolucionesLayout)
+        val  reembolsosLayout = view.findViewById<LinearLayout>(R.id.reembolsosLayout)
+
+
 
 // Configura el OnClickListener para abrir el fragmento de cancelar compras
         cancelarComprasLayout.setOnClickListener {
@@ -54,6 +58,32 @@ class PqrsFragment : Fragment() {
                 ?.addToBackStack(null)
                 ?.commit()
         }
+        devolucionesLayout.setOnClickListener {
+            // Crea una instancia del fragmento cancelar_comprasFragment
+
+            val fragmentdevoluciones = DevolucionesFragment()
+
+            // Reemplaza con el nombre correcto de tu contenedor de fragmentos (R.id.fragment_container)
+            val fragmentManager: FragmentManager? = fragmentManager
+            fragmentManager?.beginTransaction()
+                ?.replace(R.id.fragment_container, fragmentdevoluciones)
+                ?.addToBackStack(null)
+                ?.commit()
+        }
+
+        reembolsosLayout.setOnClickListener {
+            // Crea una instancia del fragmento cancelar_comprasFragment
+
+            val fragmentreembolsos =  ReembolsosFragment()
+
+            // Reemplaza con el nombre correcto de tu contenedor de fragmentos (R.id.fragment_container)
+            val fragmentManager: FragmentManager? = fragmentManager
+            fragmentManager?.beginTransaction()
+                ?.replace(R.id.fragment_container, fragmentreembolsos)
+                ?.addToBackStack(null)
+                ?.commit()
+        }
+
 
 
 
