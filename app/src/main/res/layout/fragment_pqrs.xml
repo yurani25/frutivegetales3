@@ -101,6 +101,7 @@
             android:background="#D1D1D1" />
 
         <LinearLayout
+            android:id="@+id/devolucionesLayout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center_vertical"

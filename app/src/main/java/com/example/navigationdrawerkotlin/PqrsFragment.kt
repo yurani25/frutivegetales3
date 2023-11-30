@@ -39,6 +39,19 @@ class PqrsFragment : Fragment() {
                 .commit()
         }
 
+        // Obtén la referencia al LinearLayout de devoluciones
+        val devolucionesLayout = view.findViewById<LinearLayout>(R.id.devolucionesLayout)
+
+
+        // Configura el OnClickListener para abrir el fragmento de devoluciones
+        devolucionesLayout.setOnClickListener {
+            val fragmentDevoluciones = DevolucionesFragment()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragmentDevoluciones)
+                .addToBackStack(null)
+                .commit()
+        }
+
         return view
     }
 }
