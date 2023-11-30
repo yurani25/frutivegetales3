@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import com.google.firebase.database.DataSnapshot
@@ -39,7 +40,10 @@ class ListaproductosFragment : Fragment() {
                 val container = rootView.findViewById<ViewGroup>(R.id.productContainer)
                 container.removeAllViews()
 
-                // Iterar sobre los nodos de productos
+                // Verificar si hay productos antes de agregar el botón de edición
+                var hayProductos = false
+
+                // Después de obtener datos del producto en el bucle
                 for (productSnapshot in dataSnapshot.children) {
                     // Obtener datos del producto
                     val nombre = productSnapshot.child("nombre").getValue(String::class.java)
@@ -50,7 +54,6 @@ class ListaproductosFragment : Fragment() {
 
                     // Crear vistas y mostrar datos (esto es un ejemplo, ajusta según tu diseño)
                     val productImageView = ImageView(requireContext())
-                    // Cargar la imagen utilizando Picasso o Glide (asegúrate de agregar las dependencias)
                     Picasso.get().load(imageUrl).into(productImageView)
 
                     val productNameTextView = TextView(requireContext())
@@ -67,6 +70,64 @@ class ListaproductosFragment : Fragment() {
                     container.addView(productNameTextView)
                     container.addView(productPriceTextView)
                     container.addView(productDescriptionTextView)
+
+                    // Configurar el botón de eliminación
+                    val deleteButton = ImageButton(requireContext())
+                    deleteButton.setImageResource(R.drawable.baseline_delete_24)
+                    deleteButton.contentDescription = "Eliminar Producto"
+                    deleteButton.setOnClickListener {
+                        // Llamar al método de eliminación con el ID del producto
+                        val productId = productSnapshot.key
+                        eliminarProducto(productId)
+                    }
+
+                    // Agregar el botón de eliminación al diseño
+                    container.addView(deleteButton)
+
+                    // Establecer que hay al menos un producto
+                    hayProductos = true
+                }
+
+// Verificar si hay productos antes de agregar el botón de edición
+                // Verificar si hay productos antes de agregar el botón de edición
+                if (hayProductos) {
+                    // Configurar el botón de edición fuera del bucle
+                    for (productSnapshot in dataSnapshot.children) {
+                        val editButton = ImageButton(requireContext())
+                        editButton.setImageResource(R.drawable.baseline_edit_24)
+                        editButton.contentDescription = "Editar Producto"
+
+                        // Obtener el ID del producto específico
+                        val productId = productSnapshot.key
+
+                        editButton.setOnClickListener {
+                            // Abrir el fragmento de edición y pasar el ID del producto como argumento
+                            val fragmentManager = requireActivity().supportFragmentManager
+                            val fragmentTransaction = fragmentManager.beginTransaction()
+
+                            val editFragment = editproductoFragment()
+                            val args = Bundle()
+                            args.putString("productId", productId)
+                            editFragment.arguments = args
+
+                            fragmentTransaction.replace(R.id.fragment_container, editFragment)
+                            fragmentTransaction.addToBackStack(null)
+                            fragmentTransaction.commit()
+                        }
+
+                        // Agregar el botón de edición al diseño
+                        container.addView(editButton)
+                    }
+                }
+            }
+
+                private fun eliminarProducto(productId: String?) {
+                if (isAdded && productId != null) {
+                    // Referencia al producto específico en la base de datos
+                    val productoRef = databaseReference.child(productId)
+
+                    // Eliminar el producto de la base de datos
+                    productoRef.removeValue()
                 }
             }
 
