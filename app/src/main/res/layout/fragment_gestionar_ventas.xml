@@ -1,0 +1,51 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+
+    <EditText
+        android:id="@+id/edtFiltroProducto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Buscar por producto"
+        android:inputType="text"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewVentas"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Estadísticas -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Estadísticas "
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/txtTotalVentas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total Ventas: $"/>
+
+    <TextView
+        android:id="@+id/txtPromedioVenta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Promedio Venta: $"/>
+
+
+    <Button
+        android:id="@+id/btnAgregarVenta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Agregar Venta"
+        android:layout_marginTop="16dp"/>
+</LinearLayout>

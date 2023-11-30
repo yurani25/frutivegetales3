@@ -8,16 +8,6 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.FragmentManager
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [PqrsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PqrsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,70 +15,45 @@ class PqrsFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_pqrs, container, false)
 
-        // Obtén la referencia al LinearLayout de cancelar compras
         val cancelarComprasLayout = view.findViewById<LinearLayout>(R.id.cancelarComprasLayout)
         val preguntasComprasLayout = view.findViewById<LinearLayout>(R.id.preguntasComprasLayout)
         val devolucionesLayout = view.findViewById<LinearLayout>(R.id.devolucionesLayout)
-        val  reembolsosLayout = view.findViewById<LinearLayout>(R.id.reembolsosLayout)
+        val reembolsosLayout = view.findViewById<LinearLayout>(R.id.reembolsosLayout)
+        val gestionarVentasLayout = view.findViewById<LinearLayout>(R.id.gestionarVentasLayout)
 
-
-
-// Configura el OnClickListener para abrir el fragmento de cancelar compras
         cancelarComprasLayout.setOnClickListener {
-            // Crea una instancia del fragmento cancelar_comprasFragment
             val fragmentCancelarCompras = cancelar_comprasFragment()
-
-
-            // Reemplaza con el nombre correcto de tu contenedor de fragmentos (R.id.fragment_container)
-            val fragmentManager: FragmentManager? = fragmentManager
-            fragmentManager?.beginTransaction()
-                ?.replace(R.id.fragment_container, fragmentCancelarCompras)
-                ?.addToBackStack(null)
-                ?.commit()
+            replaceFragment(fragmentCancelarCompras)
         }
+
         preguntasComprasLayout.setOnClickListener {
-            // Crea una instancia del fragmento cancelar_comprasFragment
-
             val fragmentpreguntasCompras = preguntasCompras()
-
-            // Reemplaza con el nombre correcto de tu contenedor de fragmentos (R.id.fragment_container)
-            val fragmentManager: FragmentManager? = fragmentManager
-            fragmentManager?.beginTransaction()
-                ?.replace(R.id.fragment_container, fragmentpreguntasCompras)
-                ?.addToBackStack(null)
-                ?.commit()
+            replaceFragment(fragmentpreguntasCompras)
         }
+
         devolucionesLayout.setOnClickListener {
-            // Crea una instancia del fragmento cancelar_comprasFragment
-
             val fragmentdevoluciones = DevolucionesFragment()
-
-            // Reemplaza con el nombre correcto de tu contenedor de fragmentos (R.id.fragment_container)
-            val fragmentManager: FragmentManager? = fragmentManager
-            fragmentManager?.beginTransaction()
-                ?.replace(R.id.fragment_container, fragmentdevoluciones)
-                ?.addToBackStack(null)
-                ?.commit()
+            replaceFragment(fragmentdevoluciones)
         }
 
         reembolsosLayout.setOnClickListener {
-            // Crea una instancia del fragmento cancelar_comprasFragment
-
-            val fragmentreembolsos =  ReembolsosFragment()
-
-            // Reemplaza con el nombre correcto de tu contenedor de fragmentos (R.id.fragment_container)
-            val fragmentManager: FragmentManager? = fragmentManager
-            fragmentManager?.beginTransaction()
-                ?.replace(R.id.fragment_container, fragmentreembolsos)
-                ?.addToBackStack(null)
-                ?.commit()
+            val fragmentreembolsos = ReembolsosFragment()
+            replaceFragment(fragmentreembolsos)
         }
 
-
-
-
-
+        gestionarVentasLayout.setOnClickListener {
+            val fragmentGestionarVentas = GestionarVentasFragment()
+            replaceFragment(fragmentGestionarVentas)
+        }
 
         return view
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        val fragmentManager: FragmentManager? = fragmentManager
+        fragmentManager?.beginTransaction()
+            ?.replace(R.id.fragment_container, fragment)
+            ?.addToBackStack(null)
+            ?.commit()
     }
 }
