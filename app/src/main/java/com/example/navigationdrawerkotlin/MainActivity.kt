@@ -92,6 +92,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_cart -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, CarritoFragment())
                 .commit()
+            R.id.nav_mapa -> supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, MapsFragment())
+                .commit()
 
             R.id.nav_listadeproductos -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, ListaproductosFragment())
