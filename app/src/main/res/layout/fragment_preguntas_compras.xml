@@ -7,16 +7,16 @@
 
     <!-- Vista de fondo con la imagen -->
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/verduras2"
+        android:layout_width="wrap_content"
+        android:layout_height="657dp"
+        android:alpha="0.4"
         android:scaleType="centerCrop"
-        android:alpha="0.4"/>
+        android:src="@drawable/jiaaa" />
 
     <!-- Contenedor para las preguntas -->
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_width="421dp"
+        android:layout_height="424dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,7 +31,7 @@
                 android:text="Preguntas Frecuentes sobre Compras"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="#ED0606"
+                android:textColor="#000000"
             android:paddingBottom="16dp"/>
 
             <ScrollView
