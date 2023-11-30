@@ -37,9 +37,14 @@
             android:title="Carrito" />
 
         <item
-            android:id="@+id/nav_misproductos"
+            android:id="@+id/nav_listadeproductos"
             android:icon="@drawable/misproductos"
-            android:title="Mis productos" />
+            android:title="mis productos" />
+
+        <item
+            android:id="@+id/nav_misproductos"
+            android:icon="@drawable/supermacado"
+            android:title="agregar producto" />
 
         <item
             android:id="@+id/nav_cuenta"
@@ -51,6 +56,8 @@
             android:title="Mostrar Mapa"
             android:icon="@drawable/baseline_map_24"
             app:showAsAction="ifRoom" />
+
+
     </group>
 
     <item android:title="">

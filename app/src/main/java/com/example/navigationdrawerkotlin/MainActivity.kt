@@ -1,6 +1,7 @@
 package com.example.navigationdrawerkotlin
 import CategoriasFragment
 import CuentaFragment
+import MisproductosFragment
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -88,6 +89,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_cuenta -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, CuentaFragment())
                 .commit()
+            R.id.nav_cart -> supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, CarritoFragment())
+                .commit()
+
+            R.id.nav_listadeproductos -> supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, ListaproductosFragment())
+                .commit()
+
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
