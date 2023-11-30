@@ -14,7 +14,6 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener
 import com.google.android.gms.maps.SupportMapFragment
 
-
 class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapClickListener, OnMapLongClickListener {
     private lateinit var txtLatitud: EditText
     private lateinit var txtLongitud: EditText
@@ -36,26 +35,29 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapClickListene
         mMap = googleMap
         mMap.setOnMapClickListener(this)
         mMap.setOnMapLongClickListener(this)
-        val colombia = LatLng(4.5709, -74.2973)
-        mMap.addMarker(MarkerOptions().position(colombia).title("Colombia"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(colombia))
+
+        // Coordenadas de Popayán, Cauca
+        val popayan = LatLng(2.4442, -76.6141)
+
+        mMap.addMarker(MarkerOptions().position(popayan).title("Popayán, Cauca"))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(popayan))
     }
 
     override fun onMapClick(latLng: LatLng) {
         txtLatitud.setText(latLng.latitude.toString())
         txtLongitud.setText(latLng.longitude.toString())
         mMap.clear()
-        val colombia = LatLng(latLng.latitude, latLng.longitude)
-        mMap.addMarker(MarkerOptions().position(colombia).title(""))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(colombia))
+        val popayan = LatLng(latLng.latitude, latLng.longitude)
+        mMap.addMarker(MarkerOptions().position(popayan).title(""))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(popayan))
     }
 
     override fun onMapLongClick(latLng: LatLng) {
         txtLatitud.setText(latLng.latitude.toString())
         txtLongitud.setText(latLng.longitude.toString())
         mMap.clear()
-        val colombia = LatLng(latLng.latitude, latLng.longitude)
-        mMap.addMarker(MarkerOptions().position(colombia).title(""))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(colombia))
+        val popayan = LatLng(latLng.latitude, latLng.longitude)
+        mMap.addMarker(MarkerOptions().position(popayan).title(""))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(popayan))
     }
 }
