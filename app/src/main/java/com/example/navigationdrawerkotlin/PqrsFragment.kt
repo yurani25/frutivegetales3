@@ -1,3 +1,4 @@
+// PqrsFragment.kt
 package com.example.navigationdrawerkotlin
 
 import android.os.Bundle
@@ -6,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import androidx.fragment.app.FragmentManager
 
 class PqrsFragment : Fragment() {
     override fun onCreateView(
@@ -42,12 +42,23 @@ class PqrsFragment : Fragment() {
         // Obtén la referencia al LinearLayout de devoluciones
         val devolucionesLayout = view.findViewById<LinearLayout>(R.id.devolucionesLayout)
 
-
         // Configura el OnClickListener para abrir el fragmento de devoluciones
         devolucionesLayout.setOnClickListener {
             val fragmentDevoluciones = DevolucionesFragment()
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, fragmentDevoluciones)
+                .addToBackStack(null)
+                .commit()
+        }
+
+        // Obtén la referencia al LinearLayout de reembolsos
+        val reembolsosLayout = view.findViewById<LinearLayout>(R.id.reembolsosLayout)
+
+        // Configura el OnClickListener para abrir el fragmento de reembolsos
+        reembolsosLayout.setOnClickListener {
+            val fragmentReembolsos = ReembolsosFragment()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragmentReembolsos)
                 .addToBackStack(null)
                 .commit()
         }
