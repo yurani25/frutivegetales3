@@ -20,6 +20,7 @@ class PqrsFragment : Fragment() {
         val devolucionesLayout = view.findViewById<LinearLayout>(R.id.devolucionesLayout)
         val reembolsosLayout = view.findViewById<LinearLayout>(R.id.reembolsosLayout)
         val gestionarVentasLayout = view.findViewById<LinearLayout>(R.id.gestionarVentasLayout)
+        val preguntasVentasLayout = view.findViewById<LinearLayout>(R.id.preguntasVentasLayout)
 
         cancelarComprasLayout.setOnClickListener {
             val fragmentCancelarCompras = cancelar_comprasFragment()
@@ -44,6 +45,12 @@ class PqrsFragment : Fragment() {
         gestionarVentasLayout.setOnClickListener {
             val fragmentGestionarVentas = GestionarVentasFragment()
             replaceFragment(fragmentGestionarVentas)
+        }
+
+        preguntasVentasLayout.setOnClickListener {
+
+            val fragmentPreguntasVentas = PreguntasVentasFragment()
+            replaceFragment(fragmentPreguntasVentas)
         }
 
         return view

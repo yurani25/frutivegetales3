@@ -193,12 +193,13 @@
             android:background="#000000" />
 
         <LinearLayout
-            android:id="@+id/gestionarVentasLayout"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/gestionarVentasLayout"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:gravity="center_vertical"
@@ -227,6 +228,7 @@
                 android:background="#D1D1D1" />
 
             <LinearLayout
+                android:id="@+id/preguntasVentasLayout"
                 android:layout_width="match_parent"
                 android:layout_height="75dp"
                 android:gravity="center_vertical"
