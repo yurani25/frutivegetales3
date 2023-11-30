@@ -1,0 +1,134 @@
+<!-- activity_faq.xml -->
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Vista de fondo con la imagen -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/verduras2"
+        android:scaleType="centerCrop"
+        android:alpha="0.4"/>
+
+    <!-- Contenedor para las preguntas -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Encabezado de la sección -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Preguntas Frecuentes sobre Compras"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#ED0606"
+            android:paddingBottom="16dp"/>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Pregunta 1 -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="¿Cuáles son los métodos de pago aceptados?"
+                        android:textSize="16sp"
+                        android:textColor="#000000"
+                        android:padding="16dp"
+                        android:layout_marginBottom="8dp"/>
+
+                    <!-- Pregunta 2 -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="¿Cuál es el tiempo estimado de entrega?"
+                        android:textSize="16sp"
+                        android:textColor="#000000"
+                        android:padding="16dp"
+                        android:paddingBottom="8dp"/>
+
+                    <!-- Pregunta 3 -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="¿Cómo puedo realizar un cambio o devolución?"
+                        android:textSize="16sp"
+                        android:textColor="#000000"
+                        android:padding="16dp"
+                        android:paddingBottom="8dp"/>
+
+                    <!-- Pregunta 4 -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="¿Qué hago si mi pedido llega dañado?"
+                        android:textSize="16sp"
+                        android:textColor="#000000"
+                        android:padding="16dp"
+                        android:paddingBottom="8dp"/>
+
+                    <!-- Pregunta 5 -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="¿Se realizan envíos internacionales?"
+                        android:textSize="16sp"
+                        android:textColor="#000000"
+                        android:padding="16dp"
+                        android:paddingBottom="8dp"/>
+
+                    <!-- Pregunta 6 -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="¿Cómo puedo contactar al servicio al cliente?"
+                        android:textSize="16sp"
+                        android:textColor="#000000"
+                        android:padding="16dp"
+                        android:paddingBottom="8dp"/>
+
+                    <!-- Pregunta 7 -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="¿Ofrecen descuentos por compras frecuentes?"
+                        android:textSize="16sp"
+                        android:textColor="#000000"
+                        android:padding="16dp"
+                        android:paddingBottom="8dp"/>
+
+                    <!-- Pregunta 8 -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="¿Hay restricciones en cuanto a la cantidad mínima de pedido?"
+                        android:textSize="16sp"
+                        android:textColor="#000000"
+                        android:padding="16dp"
+                        android:paddingBottom="8dp"/>
+
+                    <!-- Agregar más preguntas aquí -->
+
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+</FrameLayout>
+
