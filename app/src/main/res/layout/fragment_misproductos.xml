@@ -1,96 +1,62 @@
-<!-- fragment_misproductos.xml -->
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<!-- res/layout/fragment_misproductos.xml -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
-    <!-- ImageView para la imagen del producto -->
-    <ImageView
-        android:id="@+id/imageViewProducto"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        android:contentDescription="@string/product_image"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+    <!-- Campos para la información del producto -->
+    <EditText
+        android:id="@+id/nombreEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre del producto"
+        android:inputType="text" />
 
-    <!-- Botón para seleccionar la imagen -->
+
+    <EditText
+        android:id="@+id/tiempoReclamoEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nombreEditText"
+        android:layout_marginTop="8dp"
+        android:hint="Tiempo de reclamo"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/precioEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tiempoReclamoEditText"
+        android:layout_marginTop="8dp"
+        android:hint="Precio"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/descripcionEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/precioEditText"
+        android:layout_marginTop="8dp"
+        android:hint="Descripción"
+        android:inputType="text" />
+
+    <!-- Botón para seleccionar una imagen -->
     <Button
-        android:id="@+id/btnSeleccionarImagen"
+        android:id="@+id/seleccionarImagenButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/select_image"
-        app:layout_constraintTop_toBottomOf="@id/imageViewProducto"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        android:layout_below="@id/descripcionEditText"
+        android:layout_marginTop="16dp"
+        android:text="Seleccionar Imagen" />
 
-    <!-- EditText para el nombre del producto -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilNombre"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/btnSeleccionarImagen"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextNombre"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/enter_product_name"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <!-- EditText para el precio del producto -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilPrecio"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tilNombre"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextPrecio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:hint="@string/enter_product_price"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <!-- EditText para la descripción del producto -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilDescripcion"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tilPrecio"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextDescripcion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/enter_product_description"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <!-- Botón para agregar el producto -->
+    <!-- Botón para crear el producto -->
     <Button
-        android:id="@+id/btnAgregarProducto"
-        android:layout_width="wrap_content"
+        android:id="@+id/crearProductoButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/add_product"
-        app:layout_constraintTop_toBottomOf="@id/tilDescripcion"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_below="@id/seleccionarImagenButton"
+        android:layout_marginTop="16dp"
+        android:text="Crear Producto" />
+
+</RelativeLayout>

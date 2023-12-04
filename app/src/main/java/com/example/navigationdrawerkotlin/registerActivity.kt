@@ -1,101 +1,93 @@
 package com.example.navigationdrawerkotlin
-
 import android.content.Intent
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
+import com.example.navigationdrawerkotlin.data.RetrofitUsers
+import com.example.navigationdrawerkotlin.reponse.UserResponse
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.FirebaseDatabase
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
 
 class registerActivity : AppCompatActivity() {
 
-    private lateinit var auth: FirebaseAuth
+    private lateinit var etName: TextInputEditText
+    private lateinit var etApellido: TextInputEditText
+    private lateinit var etEdad: TextInputEditText
+    private lateinit var etEmail: TextInputEditText
+    private lateinit var etPhone: TextInputEditText
+    private lateinit var etPassword: TextInputEditText
+    private lateinit var etConfirmPassword: TextInputEditText
+    private lateinit var registerButton: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        auth = FirebaseAuth.getInstance()
+        etName = findViewById(R.id.etName)
+        etApellido = findViewById(R.id.apellido)
+        etEdad = findViewById(R.id.edad)
+        etEmail = findViewById(R.id.etEmail)
+        etPhone = findViewById(R.id.etPhone)
+        etPassword = findViewById(R.id.etPassword)
+        etConfirmPassword = findViewById(R.id.etconfirPassword)
+        registerButton = findViewById(R.id.registerButton)
 
-        val registerButton = findViewById<Button>(R.id.registerButton)
         registerButton.setOnClickListener {
-            val emailEditText = findViewById<TextInputEditText>(R.id.etEmail)
-            val passwordEditText = findViewById<TextInputEditText>(R.id.etPassword)
-            val confirmPasswordEditText = findViewById<TextInputEditText>(R.id.etconfirPassword)
-            val nameEditText = findViewById<TextInputEditText>(R.id.etName)
-            val apellidoEditText = findViewById<TextInputEditText>(R.id.apellido)
-            val edadEditText = findViewById<TextInputEditText>(R.id.edad)
-            val etPhoneEditText = findViewById<TextInputEditText>(R.id.etPhone)
+            val name = etName.text.toString()
+            val apellido = etApellido.text.toString()
+            val edadText = etEdad.text.toString()
+            val email = etEmail.text.toString()
+            val phone = etPhone.text.toString()
+            val password = etPassword.text.toString()
+            val confirmPassword = etConfirmPassword.text.toString()
 
-
-            val email = emailEditText.text.toString().trim()
-            val password = passwordEditText.text.toString().trim()
-            val confirmPassword = confirmPasswordEditText.text.toString().trim()
-            val name = nameEditText.text.toString().trim()
-            val apellido = apellidoEditText.text.toString().trim()
-            val edad = edadEditText.text.toString().trim()
-            val etPhone = etPhoneEditText.text.toString().trim()
-
-            if (email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty() && name.isNotEmpty() && apellido.isNotEmpty() && edad.isNotEmpty()  && etPhone.isNotEmpty()){
-                registerUser(email, password, confirmPassword, name, apellido, edad , etPhone )
-            } else {
-                Toast.makeText(this, "Ingrese todos los campos obligatorios", Toast.LENGTH_SHORT).show()
+            // Verificar que los campos no estén vacíos
+            if (name.isEmpty() || apellido.isEmpty() || edadText.isEmpty() || email.isEmpty() || phone.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+                Toast.makeText(this, "Todos los campos deben ser completados", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
-        }
-    }
 
-    private fun registerUser(email: String, password: String, confirmPassword: String, name: String, apellido: String, edad: String , telefono:String) {
-        if (password != confirmPassword) {
-            Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
-            return
-        }
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Usuario registrado exitosamente
-                    val user: FirebaseUser? = auth.currentUser
+            val edad = edadText.toInt()
 
-                    // Obtén la referencia a la imagen predeterminada en el directorio "drawable"
-                    val drawableResourceId = resources.getIdentifier("default_profile_image", "drawable", packageName)
+            // Verificar que las contraseñas coincidan
+            if (password != confirmPassword) {
+                Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
-                    // Convierte el recurso drawable a URL
-                    val defaultImageUrl = Uri.parse("android.resource://$packageName/$drawableResourceId").toString()
+            val userData = HashMap<String, String>()
+            userData["nombres"] = name
+            userData["apellidos"] = apellido
+            userData["edad"] = edad.toString()
+            userData["email"] = email
+            userData["telefono"] = phone
+            userData["password"] = password
 
-
-                    // Aquí puedes agregar la lógica para almacenar datos en Realtime Database
-                    val userId = user?.uid
-                    if (userId != null) {
-                        val databaseReference = FirebaseDatabase.getInstance().reference.child("users").child(userId)
-
-                        val userData = HashMap<String, Any>()
-                        userData["name"] = name
-                        userData["apellido"] = apellido
-                        userData["edad"] = edad
-                        userData["telefono"] = telefono
-                        userData["imageUrl"] = defaultImageUrl // Establece la URL de imagen predeterminada
-
-                        // Guarda los datos del usuario en la base de datos
-                        databaseReference.setValue(userData)
-                            .addOnCompleteListener { databaseTask ->
-                                if (databaseTask.isSuccessful) {
-                                    Toast.makeText(this, "Registro exitoso: ${user.email}", Toast.LENGTH_SHORT).show()
-
-                                    // Redirige al usuario a la actividad de inicio de sesión
-                                    val intent = Intent(this, LoginActivity::class.java)
-                                    startActivity(intent)
-                                    finish() // Esto evita que el usuario pueda volver atrás presionando el botón "Atrás"
-                                } else {
-                                    Toast.makeText(this, "Error al almacenar datos en la base de datos", Toast.LENGTH_SHORT).show()
-                                }
-                            }
+            // Llamar a la API de registro
+            val call = RetrofitUsers.instance.register(userData)
+            call.enqueue(object : Callback<UserResponse> {
+                override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
+                    if (response.isSuccessful) {
+                        val userResponse = response.body()
+                        Toast.makeText(this@registerActivity, userResponse?.message, Toast.LENGTH_SHORT).show()
+                        // Redirigir a la LoginActivity
+                        val intent = Intent(this@registerActivity, LoginActivity::class.java)
+                        startActivity(intent)
+                        finish()  // Esto ayuda a cerrar la actividad actual para que el usuario no pueda volver atrás.
+                    } else {
+                        Toast.makeText(this@registerActivity, "Error en el registro", Toast.LENGTH_SHORT).show()
                     }
-                } else {
-                    Toast.makeText(this, "Error en el registro: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                 }
-            }
+
+                override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                    Toast.makeText(this@registerActivity, "Error de red: ${t.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
     }
 }
 

@@ -1,54 +1,41 @@
-<!-- res/layout/fragment_listaproductos.xml -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <!-- Agrega un encabezado si lo deseas -->
+    <!-- Puedes personalizar esto según tus necesidades -->
+    <ImageView
+        android:id="@+id/imageViewProducto"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/cargando" />
+
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/textViewNombre"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lista de Productos"
-        android:textSize="18sp"
-        android:gravity="center"
-        android:padding="16dp"/>
+        android:text="Nombre del Producto:" />
 
-    <!-- Agrega un ScrollView -->
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/textViewPrecio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Precio: $0" />
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp">
+    <TextView
+        android:id="@+id/textViewDescripcion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="descripcion:" />
+    <TextView
+        android:id="@+id/textViewTiemporeclamo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="tiempo de reclamo:" />
 
-            <!-- Contenedor para los productos -->
-            <LinearLayout
-                android:id="@+id/productContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
 
-                <!-- Puedes repetir este bloque para cada producto dinámicamente -->
+    <!-- Agrega más TextView según sea necesario para otros detalles del producto -->
 
-                <!-- Botón de eliminación -->
-                <ImageButton
-                    android:id="@+id/deleteButton"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/baseline_delete_24"
-                    android:contentDescription="Eliminar Producto"/>
-
-                <!-- Botón de edición -->
-                <ImageButton
-                    android:id="@+id/editButton"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/baseline_edit_24"
-                    android:contentDescription="Editar Producto"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-    </ScrollView>
 </LinearLayout>

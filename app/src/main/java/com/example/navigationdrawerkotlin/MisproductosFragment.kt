@@ -1,31 +1,41 @@
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.navigationdrawerkotlin.ListaproductosFragment
 import com.example.navigationdrawerkotlin.R
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
-import com.google.firebase.storage.UploadTask
-import java.io.ByteArrayOutputStream
+import com.example.navigationdrawerkotlin.data.RetrofitProduc
+import com.example.navigationdrawerkotlin.reponse.Producto
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import retrofit2.Callback
+import java.io.InputStream
+import retrofit2.Call
+import retrofit2.Response
+
+
+
 
 class MisproductosFragment : Fragment() {
-    private lateinit var myRef: DatabaseReference
-    private lateinit var storage: FirebaseStorage
-    private val PICK_IMAGE_REQUEST = 1
-    private var selectedImageBitmap: Bitmap? = null // Declarado a nivel de clase
+    companion object {
+        private const val PICK_IMAGE_REQUEST = 1
+    }
+
+    private lateinit var selectedImageUri: Uri
+
+    private lateinit var nombreEditText: EditText
+    private lateinit var tiempoReclamoEditText: EditText
+    private lateinit var precioEditText: EditText
+    private lateinit var descripcionEditText: EditText
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,98 +43,108 @@ class MisproductosFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_misproductos, container, false)
 
-        val database = FirebaseDatabase.getInstance()
-        myRef = database.getReference("productos")
+        nombreEditText = view.findViewById(R.id.nombreEditText)
+        tiempoReclamoEditText = view.findViewById(R.id.tiempoReclamoEditText)
+        precioEditText = view.findViewById(R.id.precioEditText)
+        descripcionEditText = view.findViewById(R.id.descripcionEditText)
 
-        storage = FirebaseStorage.getInstance()
-
-        val editTextNombre = view.findViewById<EditText>(R.id.editTextNombre)
-        val editTextPrecio = view.findViewById<EditText>(R.id.editTextPrecio)
-        val editTextDescripcion = view.findViewById<EditText>(R.id.editTextDescripcion)
-        val btnAgregarProducto = view.findViewById<Button>(R.id.btnAgregarProducto)
-
-        btnAgregarProducto.setOnClickListener {
-            val nombre = editTextNombre.text.toString()
-            val precio = editTextPrecio.text.toString().toDoubleOrNull() ?: 0.0
-            val descripcion = editTextDescripcion.text.toString()
-            if (nombre.isNotBlank() && precio > 0) {
-                val nuevoProducto: MutableMap<String, Any> = hashMapOf(
-                    "nombre" to nombre,
-                    "precio" to precio,
-                    "descripcion" to descripcion,
-                    "imageUrl" to "" // Esto se establecerá después de subir la imagen
-                )
-
-                val imagenProducto = obtenerImagenDeAlgunaFuente()
-
-                agregarProductoConImagen(imagenProducto, nuevoProducto)
-
-                // Obtén el FragmentManager desde la actividad que contiene el fragmento actual
-                val fragmentManager = requireActivity().supportFragmentManager
-
-                // Reemplaza el fragmento actual con ListadoProductosFragment
-                val fragmentTransaction = fragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.fragment_container, ListaproductosFragment())
-                fragmentTransaction.addToBackStack(null)  // Agrega la transacción a la pila para que se pueda volver atrás
-                fragmentTransaction.commit()
-
-
-            } else {
-                // Manejar caso de valores no válidos
-            }
+        val seleccionarImagenButton: Button = view.findViewById(R.id.seleccionarImagenButton)
+        seleccionarImagenButton.setOnClickListener {
+            openGalleryForImage()
         }
 
-        val imageViewProducto = view.findViewById<ImageView>(R.id.imageViewProducto)
-        val btnSeleccionarImagen = view.findViewById<Button>(R.id.btnSeleccionarImagen)
-
-        btnSeleccionarImagen.setOnClickListener {
-            abrirGaleria()
+        val crearProductoButton: Button = view.findViewById(R.id.crearProductoButton)
+        crearProductoButton.setOnClickListener {
+            createProduct()
         }
 
         return view
     }
 
-    private fun abrirGaleria() {
-        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+    private fun openGalleryForImage() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
         startActivityForResult(intent, PICK_IMAGE_REQUEST)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
-            val imageUri = data.data
-            selectedImageBitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, imageUri)
-            val imageViewProducto = view?.findViewById<ImageView>(R.id.imageViewProducto)
-            imageViewProducto?.setImageBitmap(selectedImageBitmap)
-        }
-    }
-
-    private fun agregarProductoConImagen(bitmap: Bitmap?, nuevoProducto: MutableMap<String, Any>) {
-        val nuevoProductoKey = myRef.push().key
-
-        if (bitmap != null && nuevoProductoKey != null) {
-            val baos = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-            val data = baos.toByteArray()
-
-            val imagenRef: StorageReference =
-                storage.reference.child("imagenes/$nuevoProductoKey.jpg")
-
-            val uploadTask: UploadTask = imagenRef.putBytes(data)
-            uploadTask.addOnSuccessListener { taskSnapshot ->
-                imagenRef.downloadUrl.addOnSuccessListener { uri ->
-                    val imageUrl = uri.toString()
-                    nuevoProducto["imageUrl"] = imageUrl
-                    myRef.child(nuevoProductoKey).setValue(nuevoProducto)
-                }
-            }.addOnFailureListener {
-                // Manejar errores de carga de imagen
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
+            data?.data?.let { uri ->
+                selectedImageUri = uri
+                Log.d("ImageSelection", "URI de la imagen seleccionada: $selectedImageUri")
             }
         }
     }
 
-    private fun obtenerImagenDeAlgunaFuente(): Bitmap? {
-        return selectedImageBitmap
+    private fun createProduct() {
+        if (!::selectedImageUri.isInitialized) {
+            Toast.makeText(requireContext(), "Selecciona una imagen primero", Toast.LENGTH_SHORT)
+                .show()
+            return
+        }
+
+        val productApi = RetrofitProduc.instance
+
+        val requestBodyMap = HashMap<String, RequestBody>()
+        requestBodyMap["nombres"] = createPartFromString(nombreEditText.text.toString())
+        requestBodyMap["tiempo_reclamo"] =
+            createPartFromString(tiempoReclamoEditText.text.toString())
+        requestBodyMap["precio"] = createPartFromString(precioEditText.text.toString())
+        requestBodyMap["descripcion"] = createPartFromString(descripcionEditText.text.toString())
+        requestBodyMap["user_id"] = createPartFromString("1") // Cambia esto según tus requisitos
+
+        // Obtener el archivo de la imagen seleccionada
+        val imageInputStream: InputStream? =
+            requireContext().contentResolver.openInputStream(selectedImageUri)
+        val imageByteArray: ByteArray? = imageInputStream?.readBytes()
+
+        // Crear el cuerpo de la solicitud multipart para la imagen
+        val imageRequestBody = imageByteArray?.toRequestBody("image/*".toMediaTypeOrNull())
+        val imagePart =
+            MultipartBody.Part.createFormData("imagen", "product_image.jpg", imageRequestBody!!)
+
+        // Agregar los campos del producto como partes multipart
+        val parts = ArrayList<MultipartBody.Part>()
+        for ((key, value) in requestBodyMap) {
+            parts.add(MultipartBody.Part.createFormData(key, value.toString()))
+        }
+
+        // Agregar la parte de la imagen
+        parts.add(imagePart)
+
+        // Realizar la llamada al servidor para crear el producto
+        val call = productApi.createProduct(
+            parts[0], // nombres
+            parts[1], // tiempo_reclamo
+            parts[2], // precio
+            parts[3], // descripcion
+            parts[4], // user_id
+            parts[5]  // imagen
+        )
+
+        call.enqueue(object : Callback<Producto> {
+            override fun onResponse(call: Call<Producto>, response: Response<Producto>) {
+                if (response.isSuccessful) {
+                    // Manejar la respuesta exitosa aquí
+                    val createdProduct = response.body()
+                    Log.d("ProductCreation", "Producto creado con éxito: $createdProduct")
+                } else {
+                    // Manejar errores de respuesta no exitosa
+                    Log.e("ProductCreation", "Error en la respuesta del servidor. Código: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<Producto>, t: Throwable) {
+                // Manejar errores de la llamada al servidor
+                Log.e("ProductCreation", "Error al realizar la llamada: ${t.message}")
+            }
+        })
+    }
+
+    private fun createPartFromString(value: String): RequestBody {
+        return value.toRequestBody(MultipartBody.FORM)
     }
 }
+

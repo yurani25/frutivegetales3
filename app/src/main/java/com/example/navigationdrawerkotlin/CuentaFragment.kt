@@ -1,92 +1,133 @@
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.fragment.app.FragmentTransaction
+import android.widget.EditText
+import androidx.fragment.app.Fragment
 import com.example.navigationdrawerkotlin.R
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
-import com.squareup.picasso.Picasso
+import com.example.navigationdrawerkotlin.data.RetrofitUsers
+import com.example.navigationdrawerkotlin.reponse.User
+import com.example.navigationdrawerkotlin.reponse.UserProfile
+import com.example.navigationdrawerkotlin.reponse.UserResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
 
 class CuentaFragment : Fragment() {
 
-    private lateinit var auth: FirebaseAuth
-    private lateinit var database: FirebaseDatabase
-    private lateinit var userReference: DatabaseReference
+    private lateinit var etName: EditText
+    private lateinit var etApellido: EditText
+    private lateinit var etEdad: EditText
+    private lateinit var etPhone: EditText
+    private lateinit var saveButton: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_cuenta, container, false)
+        val view = inflater.inflate(R.layout.fragment_cuenta, container, false)
 
-        auth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance()
-        val userId = auth.currentUser?.uid
-        if (userId != null) {
-            userReference = database.reference.child("users").child(userId)
+        // Inicializar vistas
+        etName = view.findViewById(R.id.etName)
+        etApellido = view.findViewById(R.id.apellido)
+        etEdad = view.findViewById(R.id.edad)
+        etPhone = view.findViewById(R.id.etPhone)
+        saveButton = view.findViewById(R.id.saveButton)
 
-            loadUserData(rootView)
+        // Configurar clic en el botón de guardar cambios
+        saveButton.setOnClickListener {
+            updateProfile()
         }
 
-        // Agregar OnClickListener al botón "Editar Perfil"
-        val editProfileButton = rootView.findViewById<Button>(R.id.editProfileButton)
-        editProfileButton.setOnClickListener {
-            // Crear y reemplazar el fragmento de edición de perfil cuando se haga clic
-            val editProfileFragment = EditProfileFragment()
-            val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
-            transaction.replace(R.id.fragment_container, editProfileFragment)
-            transaction.addToBackStack(null) // Opcional, para agregar a la pila de retroceso
-            transaction.commit()
-        }
+        // Cargar información del usuario actual
+        loadUserData()
 
-        return rootView
+        return view
     }
 
-    private fun loadUserData(rootView: View) {
-        userReference.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    val nameTextView = rootView.findViewById<TextView>(R.id.nameTextView)
-                    val apellidoTextView = rootView.findViewById<TextView>(R.id.apellidoTextView)
-                    val edadTextView = rootView.findViewById<TextView>(R.id.edadTextView)
-                    val emailTextView = rootView.findViewById<TextView>(R.id.emailTextView)
-                    val telefonoTextView = rootView.findViewById<TextView>(R.id.telefonoTextView)
+    private fun loadUserData() {
+        val sharedPreferences: SharedPreferences =
+            requireContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        val userId: Int = sharedPreferences.getInt("user_id", -1)
+        val token: String? = sharedPreferences.getString("auth_token", null)
 
-                    val name = snapshot.child("name").getValue(String::class.java)
-                    val apellido = snapshot.child("apellido").getValue(String::class.java)
-                    val edad = snapshot.child("edad").getValue(String::class.java)
-                    val email = snapshot.child("email").getValue(String::class.java)
-                    val telefono = snapshot.child("telefono").getValue(String::class.java)
+        if (userId != -1 && token != null) {
+            RetrofitUsers.instance.getUserProfile("Bearer $token", userId)
+                .enqueue(object : Callback<UserResponse> {
+                    override fun onResponse(
+                        call: Call<UserResponse>,
+                        response: Response<UserResponse>
+                    ) {
+                        if (response.isSuccessful) {
+                            val userResponse: UserResponse? = response.body()
 
-                    nameTextView.text = "Nombre: $name"
-                    apellidoTextView.text = "Apellido: $apellido"
-                    edadTextView.text = "Edad: $edad"
-                    emailTextView.text = "email: $email" // Asegúrate de que el valor de email no sea null
-                    telefonoTextView.text = "Telefono: $telefono"
+                            // Verificar si userResponse o user son nulos
+                            val user: User? = userResponse?.user
+                            if (user != null) {
+                                // Actualizar los campos de la interfaz de usuario con la información del usuario
+                                etName.setText(user.nombres)
+                                etApellido.setText(user.apellidos)
+                                etEdad.setText(user.edad.toString())
+                                etPhone.setText(user.telefono)
+                            } else {
+                                // Manejar el caso en que la respuesta no contiene la información del usuario
+                                // Puedes mostrar un mensaje de error o tomar alguna acción específica
+                            }
+                        } else {
+                            // Manejar la respuesta fallida, por ejemplo, mostrar un mensaje de error
+                        }
+                    }
 
-                    val imageUrl = snapshot.child("imageUrl").getValue(String::class.java)
+                    override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                        // Manejar errores de la llamada, por ejemplo, mostrar un mensaje de error
+                    }
+                })
+        }
+    }
 
-                    // Cargar la imagen utilizando Picasso (asegúrate de agregar la dependencia en el archivo build.gradle)
-                    val profileImageView = rootView.findViewById<ImageView>(R.id.profileImageView)
+    private fun updateProfile() {
+        // Obtén el ID del usuario y el token almacenados en SharedPreferences
+        val sharedPreferences: SharedPreferences =
+            requireContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        val userId: Int = sharedPreferences.getInt("user_id", -1)
+        val token: String? = sharedPreferences.getString("auth_token", null)
 
-                    // Si imageUrl no es nulo o vacío, carga la imagen
-                    if (!imageUrl.isNullOrEmpty()) {
-                        Picasso.get().load(imageUrl).into(profileImageView)
+        if (userId == -1 || token == null) {
+            // Manejar el caso en que el ID del usuario o el token no estén disponibles
+            return
+        }
+
+        // Obtén instancias de los campos de entrada
+        val nombres = etName.text.toString()
+        val apellidos = etApellido.text.toString()
+        val edad = etEdad.text.toString().toInt()
+        val telefono = etPhone.text.toString()
+
+        // Crear objeto UserProfile con la información actualizada
+        val userProfile = UserProfile(nombres, apellidos, edad, telefono, null)
+        RetrofitUsers.instance.updateProfile("Bearer $token", userId, userProfile)
+            .enqueue(object : Callback<UserResponse> {
+                override fun onResponse(
+                    call: Call<UserResponse>,
+                    response: Response<UserResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        // Manejar la respuesta exitosa, por ejemplo, mostrar un mensaje al usuario
+                        // También puedes llamar a loadUserData() para actualizar la interfaz con la información actualizada
+                        loadUserData()
                     } else {
-                        // Si la URL de la imagen está vacía, puedes establecer una imagen predeterminada
-                        profileImageView.setImageResource(R.drawable.usuarioperfil)
+                        // Manejar la respuesta fallida, por ejemplo, mostrar un mensaje de error
                     }
                 }
-            }
 
-            override fun onCancelled(error: DatabaseError) {
-                // Manejar el error si es necesario
-            }
-        })
+                override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                    // Manejar errores de la llamada, por ejemplo, mostrar un mensaje de error
+                }
+            })
     }
 }
+
