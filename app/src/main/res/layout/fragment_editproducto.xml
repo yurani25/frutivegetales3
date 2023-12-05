@@ -7,22 +7,7 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- ImageView para la imagen del producto -->
-    <ImageView
-        android:id="@+id/productImageView"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="16dp"
-        android:contentDescription="Imagen del producto"
-        android:scaleType="centerCrop" />
 
-    <!-- Botón para seleccionar la imagen -->
-    <Button
-        android:id="@+id/selectImageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Seleccionar Imagen" />
 
     <!-- EditText para el nombre del producto -->
     <com.google.android.material.textfield.TextInputLayout
@@ -38,6 +23,41 @@
             android:layout_height="wrap_content"
             android:hint="Nombre del producto" />
     </com.google.android.material.textfield.TextInputLayout>
+
+
+    <!-- EditText para la descripción del producto -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilProductDescription"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etProductDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Descripción del producto"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <!-- EditText para el reclamo -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilProductreclamo"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etProductreclamo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:hint="tiempo reclamo"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
 
     <!-- EditText para el precio del producto -->
     <com.google.android.material.textfield.TextInputLayout
@@ -55,34 +75,27 @@
             android:hint="Precio del producto"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- EditText para la descripción del producto -->
+
+
+    <!-- EditText para el precio del producto -->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilProductDescription"
+        android:id="@+id/tilProductUser"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etProductDescription"
+            android:id="@+id/etProductUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Descripción del producto"/>
+            android:inputType="numberDecimal"
+            android:hint="user id"/>
     </com.google.android.material.textfield.TextInputLayout>
-
-    <!-- ImageView para mostrar la imagen seleccionada -->
-    <ImageView
-        android:id="@+id/selectedImageView"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        android:contentDescription="Imagen seleccionada"
-        android:visibility="gone"
-        android:layout_marginTop="16dp"/>
 
     <!-- Botón para guardar los cambios del producto -->
     <Button
-        android:id="@+id/saveButton"
+        android:id="@+id/guardarButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Guardar Cambios"

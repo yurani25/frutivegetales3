@@ -1,52 +1,94 @@
-<!-- res/layout/fragment_misproductos.xml -->
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp">
 
-    <!-- Campos para la información del producto -->
-    <EditText
-        android:id="@+id/nombreEditText"
+    <!-- Campo para el nombre del producto -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nombreTextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nombreEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre del producto"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Campo para la descripción -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/descripcionTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nombre del producto"
-        android:inputType="text" />
+        android:layout_below="@id/nombreTextInputLayout"
+        android:layout_marginTop="8dp">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/descripcionEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Descripción"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/tiempoReclamoEditText"
+    <!-- Campo para el tiempo de reclamo -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tiempoReclamoTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/nombreEditText"
-        android:layout_marginTop="8dp"
-        android:hint="Tiempo de reclamo"
-        android:inputType="text" />
+        android:layout_below="@id/descripcionTextInputLayout"
+        android:layout_marginTop="8dp">
 
-    <EditText
-        android:id="@+id/precioEditText"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiempoReclamoEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tiempo de reclamo"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Campo para el precio -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/precioTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tiempoReclamoEditText"
-        android:layout_marginTop="8dp"
-        android:hint="Precio"
-        android:inputType="numberDecimal" />
+        android:layout_below="@id/tiempoReclamoTextInputLayout"
+        android:layout_marginTop="8dp">
 
-    <EditText
-        android:id="@+id/descripcionEditText"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/precioEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Precio"
+            android:inputType="numberDecimal" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Campo para el user ID -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/userIdTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/precioEditText"
-        android:layout_marginTop="8dp"
-        android:hint="Descripción"
-        android:inputType="text" />
+        android:layout_below="@id/precioTextInputLayout"
+        android:layout_marginTop="16dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/userIdEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="User ID"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Botón para seleccionar una imagen -->
     <Button
         android:id="@+id/seleccionarImagenButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/descripcionEditText"
+        android:layout_below="@id/userIdTextInputLayout"
         android:layout_marginTop="16dp"
         android:text="Seleccionar Imagen" />
 

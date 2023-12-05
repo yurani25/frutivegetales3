@@ -1,33 +1,52 @@
 package com.example.navigationdrawerkotlin
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.navigationdrawerkotlin.Adapter.ProductosAdapter
+import com.example.navigationdrawerkotlin.databinding.FragmentListaproductosBinding
 import com.example.navigationdrawerkotlin.ViewModel.ProductViewModel
-import com.example.navigationdrawerkotlin.ViewModel.ProductViewModelFactory
-import com.example.navigationdrawerkotlin.data.RetrofitProduc
 
 
-class ListaproductosFragment : Fragment(R.layout.fragment_listaproductos) {
 
-    private lateinit var productViewModel: ProductViewModel
+class ListaproductosFragment : Fragment() {
+
+    private lateinit var binding: FragmentListaproductosBinding
+    private lateinit var viewModel: ProductViewModel
+    private lateinit var adapter: ProductosAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Inicializar ViewModel
-        productViewModel = ViewModelProvider(this, ProductViewModelFactory(RetrofitProduc.instance)).get(ProductViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(ProductViewModel::class.java)
 
-        // Observar cambios en la lista de productos
-        productViewModel.productList.observe(viewLifecycleOwner, { productList ->
-            // Actualizar la interfaz de usuario con la lista de productos
-            // productList contiene la lista de productos obtenida desde la API
-        })
+        setupRecyclerView()
 
-        // Obtener los productos
-        productViewModel.getProducts()
+        viewModel.obtenerProductos()
+
+        viewModel.listaProductos.observe(viewLifecycleOwner) { nuevaListaProductos ->
+            nuevaListaProductos?.let {
+                adapter.dataset = it
+                adapter.notifyDataSetChanged()
+            }
+        }
+    }
+        override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentListaproductosBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    private fun setupRecyclerView() {
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        adapter = ProductosAdapter(requireContext(), ArrayList())
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.setHasFixedSize(true)
     }
 }
-
-

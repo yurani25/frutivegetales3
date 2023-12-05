@@ -1,58 +1,134 @@
 package com.example.navigationdrawerkotlin.Adapter
 
+import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
+import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.navigationdrawerkotlin.ListaproductosFragment
 import com.example.navigationdrawerkotlin.R
-import com.example.navigationdrawerkotlin.reponse.Producto
+import com.example.navigationdrawerkotlin.ViewModel.ProductViewModel
+import com.example.navigationdrawerkotlin.editproductoFragment
+import com.example.navigationdrawerkotlin.model.Productos
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
-class ProductosAdapter : ListAdapter<Producto, ProductosAdapter.ProductoViewHolder>(ProductosDiffCallback()) {
+class ProductosAdapter (val context: Context, var dataset: List<Productos>): RecyclerView.Adapter<ProductosAdapter.ProductViewHolder>() {
+    class ProductViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+        val product = view.findViewById(R.id.cartProductos) as RelativeLayout
+        val nombres: TextView = view.findViewById(R.id.textViewNombre)
+        val tiemporeclamo: TextView = view.findViewById(R.id.textViewTiemporeclamo)
+        val imagen: ImageView = view.findViewById(R.id.imageViewProducto)
+        val precio: TextView = view.findViewById(R.id.textViewPrecio)
+        val descripcion: TextView = view.findViewById(R.id.textViewDescripcion)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductoViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.fragment_listaproductos, parent, false)
-        return ProductoViewHolder(view)
+
     }
 
-    override fun onBindViewHolder(holder: ProductoViewHolder, position: Int) {
-        val producto = getItem(position)
-        holder.bind(producto)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
+
+        val adapterLayout = LayoutInflater.from(parent.context)
+            .inflate(R.layout.productos, parent, false)
+        return ProductViewHolder(adapterLayout)
     }
 
-    inner class ProductoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-       private val imageViewProducto: ImageView = itemView.findViewById(R.id.imageViewProducto)
-        private val textViewNombre: TextView = itemView.findViewById(R.id.textViewNombre)
-        private val textViewPrecio: TextView = itemView.findViewById(R.id.textViewPrecio)
-        private val textViewDescripcion: TextView = itemView.findViewById(R.id.textViewDescripcion)
-        private val textViewTiemporeclamo: TextView = itemView.findViewById(R.id.textViewTiemporeclamo)
+    override fun getItemCount(): Int {
+        return dataset.size
+    }
 
-        fun bind(producto: Producto) {
-            // Puedes personalizar esto según las vistas en tu fragment_listaproductos.xml
-            textViewNombre.text = producto.nombres
-            textViewPrecio.text = "Precio: $${producto.precio}"
-            textViewDescripcion.text = "Descripción: ${producto.descripcion}"
-            textViewTiemporeclamo.text = "Tiempo de Reclamo: ${producto.tiempo_reclamo}"
+    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
+        val item = dataset[position]
+        holder.nombres.text = item.nombres
 
-            // Utiliza Glide u otra biblioteca para cargar imágenes desde la URL
-            Glide.with(itemView.context)
-               .load(producto.imagen)
-                .placeholder(R.drawable.cargando) // Imagen de carga si es necesario
-                .into(imageViewProducto)
+        Glide
+            .with(context).load(item.imagen)
+            .centerInside()
+            .into(holder.imagen)
+
+        var imagen = item.imagen
+
+
+        holder.tiemporeclamo.text = item.tiempo_reclamo
+        holder.descripcion.text = item.descripcion
+        holder.precio.text = item.precio.toString()
+
+        holder.product.setOnClickListener {
+            mostrarProducto(item.nombres,
+                item.descripcion,
+                item.tiempo_reclamo,
+                item.precio.toString(),
+                item.user_id.toString(),
+               item.id.toString(),
+
+            )
         }
+
     }
 
-    private class ProductosDiffCallback : DiffUtil.ItemCallback<Producto>() {
-        override fun areItemsTheSame(oldItem: Producto, newItem: Producto): Boolean {
-            return oldItem === newItem // Cambia esto si tu Producto tiene una clave única
+    fun mostrarProducto(nombres: String,
+                        descripcion: String,
+                        tiempo_reclamo: String,
+                        precio: String,
+                        user_id: String,
+                        id: String) {
+        val bottomSheetDialog = BottomSheetDialog(context)
+        bottomSheetDialog.setContentView(R.layout.producto_detalle)
+
+
+        val editar: Button? = bottomSheetDialog.findViewById<Button>(R.id.btnEdit)
+        val eliminar: Button? = bottomSheetDialog.findViewById<Button>(R.id.btnDelete)
+
+        val viewModel = ViewModelProvider(context as ViewModelStoreOwner).get(ProductViewModel::class.java)
+        eliminar?.setOnClickListener{
+            viewModel.eliminarProducto(id){
+                Toast.makeText(context, "Error al eliminar el producto", Toast.LENGTH_SHORT).show()
+            }
+            if (context is FragmentActivity) {
+                val fragmentManager = context.supportFragmentManager
+                val fragmentTransaction = fragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.fragment_container, ListaproductosFragment())
+                fragmentTransaction.addToBackStack(null)
+                bottomSheetDialog.dismiss()
+                fragmentTransaction.commit()
+            }
+
+        }
+        editar?.setOnClickListener {
+            val bundle = Bundle().apply {
+                putString("nombres", nombres)
+                putString("descripcion", descripcion)
+                putString("tiempo_reclamo", tiempo_reclamo)
+                putString("precio", precio)
+                putString("user_id", user_id)
+                putString("id", id)
+            }
+
+            val editFragment = editproductoFragment()
+            editFragment.arguments = bundle
+
+            if (context is FragmentActivity) {
+                val fragmentManager = context.supportFragmentManager
+                val fragmentTransaction = fragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.fragment_container, editFragment)
+                fragmentTransaction.addToBackStack(null)
+                bottomSheetDialog.dismiss()
+                fragmentTransaction.commit()
+            }
+
         }
 
-        override fun areContentsTheSame(oldItem: Producto, newItem: Producto): Boolean {
-            return oldItem == newItem
-        }
+
+
+   bottomSheetDialog.show()
     }
+
 }

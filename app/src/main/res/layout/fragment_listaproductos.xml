@@ -1,41 +1,17 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".PrincipalActivity">
 
-    <!-- Puedes personalizar esto según tus necesidades -->
-    <ImageView
-        android:id="@+id/imageViewProducto"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/cargando" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="14dp"
+        android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/productos" />
 
-    <TextView
-        android:id="@+id/textViewNombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nombre del Producto:" />
-
-    <TextView
-        android:id="@+id/textViewPrecio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Precio: $0" />
-
-    <TextView
-        android:id="@+id/textViewDescripcion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="descripcion:" />
-    <TextView
-        android:id="@+id/textViewTiemporeclamo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="tiempo de reclamo:" />
-
-
-    <!-- Agrega más TextView según sea necesario para otros detalles del producto -->
-
-</LinearLayout>
+</FrameLayout>
