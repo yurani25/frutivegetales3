@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFCFC"
+    android:background="@drawable/img_3"
     tools:context=".SplashScreen">
 
     <!--THIS IS IMAGEVIEW FOR OUR IMAGE IN SPLASH SCREEN-->
@@ -13,10 +13,11 @@
         HERE geeksforgeeks IS THE NAME OF IMAGE-->
     <ImageView
         android:id="@+id/SplashScreenImage"
-        android:layout_width="700dp"
-        android:layout_height="2000dp"
+        android:layout_width="800dp"
+        android:layout_height="300dp"
         android:src="@drawable/logo"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
